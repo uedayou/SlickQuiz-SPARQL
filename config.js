@@ -27,5 +27,5 @@ var quizJSON = {
     }
 };
 
-var label_correct = "<p><span>正解!</span></p>";
-var label_incorrect = "<p><span>不正解...</span></p>";
+var label_correct = "<p><span>正解</span></p>";
+var label_incorrect = "<p><span>不正解</span></p>";
