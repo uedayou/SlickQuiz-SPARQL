@@ -6,7 +6,7 @@ jQueryクイズアプリ [SlickQuiz](https://github.com/jewlofthelotus/SlickQuiz
 
 <http://uedayou.net/SlickQuiz-SPARQL/>
 
-利用データ：　[横浜検定データ](http://linkdata.org/work/rdf1s560i)
+利用データ：　[横浜検定問題・解答集](http://linkdata.org/work/rdf1s560i)
 
 ## 使い方
 
