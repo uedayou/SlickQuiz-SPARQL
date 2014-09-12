@@ -1,6 +1,6 @@
 # SlickQuiz-SPARQL
 
-jQueryクイズアプリ SlickQuiz で SPARQLの検索結果を利用できるようにしました。
+jQueryクイズアプリ [SlickQuiz](https://github.com/jewlofthelotus/SlickQuiz) で SPARQLの検索結果を利用できるようにしました。
 
 ## デモ
 
@@ -10,4 +10,55 @@ jQueryクイズアプリ SlickQuiz で SPARQLの検索結果を利用できる�
 
 ## 使い方
 
-作成中...
+config.js の endpoint に SPARQLエンドポイントを、query に SPARQLクエリを入力してください。
+queryは、/* ... */ の中に記述してください。
+
+	// SPARQLエンドポイントURL
+	var endpoint = "http://lodcu.cs.chubu.ac.jp/SparqlEPCU/api/yokohama_quiz";
+	// SPARQLクエリ
+	var query = (function () {/*
+		select distinct * where { ?uri <http://linkdata.org/property/rdf1s560i#question> ?question;
+		<http://linkdata.org/property/rdf1s560i#choice1> ?choise1;
+		<http://linkdata.org/property/rdf1s560i#choice2> ?choise2;
+		<http://linkdata.org/property/rdf1s560i#choice3> ?choise3;
+		<http://linkdata.org/property/rdf1s560i#choice4> ?choise4;
+		<http://linkdata.org/property/rdf1s560i#answer> ?answer_no;
+		<http://linkdata.org/property/rdf1s560i#kaisetsu> ?kaisetsu.
+		bind(concat('</p>解説：',str(?kaisetsu),'</p>') as ?correct)
+		bind(concat('</p>解説：',str(?kaisetsu),'</p>') as ?incorrect) } ORDER BY RAND() LIMIT 10
+	*/}).toString().match(/\n([\s\S]*)\n/)[1];
+
+指定する変数に、以下のデータが入るように記述してください。
+
+|変数|説明|
+|----------:|--------------:|
+|?question|問題文|
+|?answer|答え|
+|?choise1, ?choise2, ?choise3 ...|選択肢|
+|?correct|正解だったときに表示するメッセージ|
+|?incorrect|不正解だったときに表示するメッセージ|
+|?answer_no|選択肢の中の答えの番号を指定※|
+
+※例えば、「1」だと「?choise1」が答えとして設定されます。
+
+また、quizJSON 内のデータを変更することで、アプリの名前や正解率に応じたメッセージをカスタマイズできます。
+
+	var quizJSON = {
+    	"info": {
+        	"name":    "横浜検定クイズ", // アプリの名前(index.htmlのtitleタグも変更する必要があります)
+        	"main":    "<p>横浜に関するクイズ集です。</p>", // アプリの説明
+        	"results": "<p>このアプリのクイズデータは、http://linkdata.org/work/rdf1s560i のデータを使用しています。</p>", // クイズ終了時のメッセージ
+        	"level1":  "すばらしい!",
+        	"level2":  "なかなかです",
+        	"level3":  "普通です",
+        	"level4":  "まだまだです",
+        	"level5":  "残念でした" // no comma here
+    	}
+	};
+
+
+その他の使い方は、[SlickQuiz](https://github.com/jewlofthelotus/SlickQuiz) を参照してください。
+
+## ライセンス
+
+Copyright &copy; 2014 Hiroshi Ueda([@uedayou](https://twitter.com/uedayou)). Licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
